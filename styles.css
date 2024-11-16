@@ -3,8 +3,10 @@ body {
     font-family: 'Oswald', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #3b3b3b;
-    color: #ffffff;
+    background-color: #ecf0f1; 
+    color: #2c3e50; 
+    justify-content: center;
+    align-items: center;
 }
 
 /* Barra de navegación */
@@ -87,6 +89,7 @@ body {
     width: 100vw; 
 
     height: 100vh; 
+    color: #ecf0f1;
 }
 
 @keyframes fadeIn {
@@ -167,3 +170,72 @@ section {
     transform: translateX(0);  
 }
 
+/* Skills section */
+.five-grid-section {
+    display: flex;
+    flex-wrap: nowrap; 
+    justify-content: center; 
+    align-items: center; 
+    gap: 20px; 
+    padding: 20px;
+    width: 100%;
+}
+
+.grid-item {
+    flex-shrink: 0;
+}
+
+.card {
+    background-color: #f8f6f6;
+    color: #353535;
+    border-radius: 10px 10px 0px 0px;
+    box-shadow: 0 4px 6px 6px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    text-align: center;
+    height: 350px;
+    width: 150px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin: 30px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.cube-container {
+    width: 300px;
+    height: 300px;
+    background: #eaeaea;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.expertise-icon {
+    font-size: 150px;
+}
+
+.progress-container {
+    background: #f1f1f1;
+    border-radius: 4px;
+    overflow: hidden;
+    height: 20px;
+    margin: 10px 0;
+}
+.progress-bar {
+    background: #4ea4ff;
+    height: 100%;
+    width: 70%; /* Cambia este valor según el progreso */
+    transition: width 0.3s ease;
+    text-align: center;
+    color: #fff;
+    line-height: 20px;
+}
+
+#typingEffect {
+    font-family: 'Oswald', sans-serif; 
+    font-size: 24px; 
+    font-weight: 400; 
+}

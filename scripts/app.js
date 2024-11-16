@@ -28,9 +28,10 @@
     });
 
     const texts = [
-        "Francisco Tébar Navarro", 
         "Software Engineer", 
-        "Fullstack Developer"
+        "Fullstack Developer",
+        "CI/CD",
+        "Cloud Storage"
     ];
     let currentTextIndex = 0;
     let currentCharIndex = 0;
@@ -59,3 +60,36 @@
     }
     
     typeText();
+
+    const canvas = document.getElementById('cubeCanvas');
+    const scene = new THREE.Scene();
+
+    const sizes = {
+        width: 300,
+        height: 300,
+    };
+
+    const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 1000);
+    camera.position.z = 5;
+
+    const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
+    renderer.setSize(sizes.width, sizes.height);
+
+    const geometry = new THREE.BoxGeometry(1, 1, 1);
+    const material = new THREE.MeshBasicMaterial({
+        color: 0x007bff,
+        wireframe: true,
+    });
+    const cube = new THREE.Mesh(geometry, material);
+    scene.add(cube);
+
+    function animate() {
+        requestAnimationFrame(animate);
+
+        cube.rotation.x += 0.01;
+        cube.rotation.y += 0.01;
+
+        renderer.render(scene, camera);
+    }
+
+    animate();
