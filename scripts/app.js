@@ -61,35 +61,71 @@
     
     typeText();
 
-    const canvas = document.getElementById('cubeCanvas');
-    const scene = new THREE.Scene();
+    // Crear la escena
+    var scene = new THREE.Scene();
 
-    const sizes = {
-        width: 300,
-        height: 300,
-    };
+    // Crear la cámara
+    var camera = new THREE.PerspectiveCamera(
+        75, // Campo de visión
+        window.innerWidth / window.innerHeight, // Relación de aspecto inicial
+        0.1, // Plano cercano
+        1000 // Plano lejano
+    );
+    camera.position.z = 5; // Posicionar la cámara
 
-    const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 1000);
-    camera.position.z = 5;
+    // Seleccionar el contenedor para el canvas
+    var container = document.getElementById('three-container');
 
-    const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
-    renderer.setSize(sizes.width, sizes.height);
+    // Crear el renderer y vincularlo al contenedor
+    var renderer = new THREE.WebGLRenderer();
+    renderer.setSize(container.clientWidth, container.clientHeight); // Usar dimensiones del contenedor
+    container.appendChild(renderer.domElement); // Agregar el canvas al contenedor
 
-    const geometry = new THREE.BoxGeometry(1, 1, 1);
-    const material = new THREE.MeshBasicMaterial({
-        color: 0x007bff,
-        wireframe: true,
+    // Crear un cargador de texturas
+    var loader = new THREE.TextureLoader();
+    var mats = [
+        'https://png.pngtree.com/thumb_back/fh260/background/20230408/pngtree-rainbow-curves-abstract-colorful-background-image_2164067.jpg', // Reemplaza con tus URLs de imágenes
+        'https://png.pngtree.com/thumb_back/fh260/background/20230408/pngtree-rainbow-curves-abstract-colorful-background-image_2164067.jpg',
+        'https://png.pngtree.com/thumb_back/fh260/background/20230408/pngtree-rainbow-curves-abstract-colorful-background-image_2164067.jpg',
+        'https://png.pngtree.com/thumb_back/fh260/background/20230408/pngtree-rainbow-curves-abstract-colorful-background-image_2164067.jpg',
+        'https://png.pngtree.com/thumb_back/fh260/background/20230408/pngtree-rainbow-curves-abstract-colorful-background-image_2164067.jpg',
+        'https://png.pngtree.com/thumb_back/fh260/background/20230408/pngtree-rainbow-curves-abstract-colorful-background-image_2164067.jpg',
+    ].map((pic) => {
+        return new THREE.MeshLambertMaterial({ map: loader.load(pic) });
     });
-    const cube = new THREE.Mesh(geometry, material);
-    scene.add(cube);
 
+    // Crear la geometría de la caja
+    var geom = new THREE.BoxGeometry(2, 2, 2);
+
+    // Crear la malla (caja con materiales)
+    var box = new THREE.Mesh(geom, mats);
+    scene.add(box);
+
+    // Agregar una luz para que se refleje correctamente
+    var light = new THREE.PointLight(0xffffff, 1, 100);
+    light.position.set(10, 10, 10);
+    scene.add(light);
+
+    // Animación
     function animate() {
         requestAnimationFrame(animate);
 
-        cube.rotation.x += 0.01;
-        cube.rotation.y += 0.01;
+        // Rotar la caja
+        box.rotation.x += 0.01;
+        box.rotation.y += 0.01;
 
         renderer.render(scene, camera);
     }
 
+    // Ajustar el renderer y la cámara al cambiar el tamaño de la ventana
+    window.addEventListener('resize', function () {
+        var width = container.clientWidth;
+        var height = container.clientHeight;
+
+        renderer.setSize(width, height);
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+    });
+
+    // Iniciar la animación
     animate();

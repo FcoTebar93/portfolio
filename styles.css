@@ -269,31 +269,46 @@ section {
 
 /* Skills section */
 .skills-section {
-    background-color: #2c3e50;
-    display: flex;
-    flex-wrap: nowrap; 
-    justify-content: center; 
-    align-items: center; 
-    gap: 20px; 
+    background-color: #f4f4f4;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px; /* Espaciado entre elementos */
     padding: 20px;
-    width: 100%;
 }
 
 .skills-section .grid-item {
-    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .skills-section .card {
-    background-color: #f8f6f6;
-    color: #353535;
-    border-radius: 10px 10px 0px 0px;
-    box-shadow: 0 4px 6px 6px rgba(0, 0, 0, 0.1);
-    padding: 30px;
-    text-align: center;
-    height: 350px;
-    width: 150px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    margin: 30px;
+    border: 1px solid #ddd;
+}
+
+.skills-section .cube-container {
+    grid-column: 3 / 4; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #eaeaea;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    height: 200px; 
+}
+
+#three-container {
+    width: 100%; /* Ocupa todo el ancho disponible dentro de .cube-container */
+    height: 100%; /* Ocupa toda la altura disponible dentro de .cube-container */
+    background-color: #2c3e50; /* Fondo oscuro para resaltar la animación */
+    border-radius: 8px; /* Consistencia con el diseño */
+    overflow: hidden; /* Asegura que el contenido no se desborde */
+    position: relative; /* Para permitir posicionamiento interno relativo */
 }
 
 .skills-section .card:hover {
@@ -301,18 +316,9 @@ section {
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
 }
 
-.skills-section .cube-container {
-    width: 300px;
-    height: 300px;
-    background: #eaeaea;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-}
-
 .skills-section .expertise-icon {
     font-size: 150px;
+    max-width: 150px;
 }
 
 .skills-section .progress-container {
@@ -322,6 +328,7 @@ section {
     height: 20px;
     margin: 10px 0;
 }
+
 .skills-section .progress-bar {
     background: #4ea4ff;
     height: 100%;
